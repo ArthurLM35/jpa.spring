@@ -17,7 +17,7 @@ public class IndexController {
 	}
 	
 	@GetMapping("/connection")
-	public String con() {
+	public String connect() { 
 		return "connection.html";
 	}
 }
