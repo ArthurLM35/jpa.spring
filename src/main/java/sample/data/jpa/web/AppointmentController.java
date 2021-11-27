@@ -180,6 +180,7 @@ public String byWorker(@PathVariable("workername") String workername) {
    * GET /update  --> Update the email and the name for the appointment in the 
    * database having the passed id.
    */
+  //peut etre faire un update pour chaque argument
   @RequestMapping("/update")
   @ResponseBody
   public String updateappointment(long id,String date, int length,User us, Worker work, String des) {

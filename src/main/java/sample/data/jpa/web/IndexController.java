@@ -10,4 +10,14 @@ public class IndexController {
 	public String index() {
 		return "page1.html";
 	}
+	
+	@GetMapping("/inscription")
+	public String insc() {
+		return "inscription.html";
+	}
+	
+	@GetMapping("/connection")
+	public String con() {
+		return "connection.html";
+	}
 }
