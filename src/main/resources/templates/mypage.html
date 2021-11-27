@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Titre</title>
+    </head>
+
+    <body>
+    	<h1>DoctoLib</h1>
+        <br>
+        <h2>Informations de votre compte</h2>   
+    	<br>
+        <form action="/userinfo" method="get">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Creneau</th>
+              <th scope="col">Temps</th>
+              <th scope="col">Client</th>
+              <th scope="col">Professionel</th>
+              <th scope="col">Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr  >
+              <td th:text="${u.}"></td>
+              <td th:text="${u.}"></td>
+              <td th:text="${u.}"></td>
+              <td th:text="${u.}"></td>
+              <td th:text="${u.}"></td>
+              <td th:text="${u.}"></td>
+            </tr>
+            </tbody>
+          </table>
+        </form>
+        <br>
+    	<input type="button" onclick="window.location.href = 'myhome.html';" value="Prendre un rendez-vous"/>
+    </body>
+</html>  
