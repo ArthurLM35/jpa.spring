@@ -18,22 +18,26 @@ public class UserController {
 
   /**
    * GET /create  --> Create a new user and save it in the database.
-   */
-  @RequestMapping("/create")
+   */  
+	//TODO Voir msg en cas de doublons
+  @RequestMapping("/create/{email},{name},{mdp}")
   @ResponseBody
-  public String create(String email, String name,String password) {
+  public String createParams(@PathVariable String email, @PathVariable String name, @PathVariable String mdp)  {
     String userId = "";
+   // User us;
     try {
-      User user = new User(email, name, password);
+     if(userDao.findByEmail(email) == null) {
+      User user = new User(email, name, mdp);
       userDao.save(user);
       userId = String.valueOf(user.getId());
+     // us = user;
+     }
     }
     catch (Exception ex) {
       return "Error creating the user: " + ex.toString();
     }
-    return "User succesfully created with id = " + userId;
+    return "User succesfully created with id = " + userId + "</br>"; //+ us.toString();
   }
-  
 
   /**
    * GET /delete  --> Delete the user having the passed id.

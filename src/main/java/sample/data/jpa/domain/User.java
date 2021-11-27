@@ -38,6 +38,7 @@ public class User {
   private String name;
 
   @NotNull
+  @Column(name="mdp")
   private String password;
   
 //  @OneToMany(targetEntity=Appointment.class, mappedBy="us", cascade=CascadeType.ALL)
@@ -78,6 +79,12 @@ public String getName() {
 
 public void setName(String name) {
 	this.name = name;
+}
+
+//A revoir
+//TODO
+public String getPassword() {
+	return password;
 }
 
 public void setPassword(String password) {
