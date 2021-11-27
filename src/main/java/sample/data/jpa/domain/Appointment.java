@@ -101,7 +101,8 @@ public class Appointment {
 	
 	@Override
 	public String toString() {
-		return "";
+		return String.valueOf(getId())+ " | RDV Le " + getDate() + " de " + getUs().getName() +
+			      " avec " + getWork().getName() + "<br>" + "Motif :" + getDescription() + "<br>";
 	}
 
 }

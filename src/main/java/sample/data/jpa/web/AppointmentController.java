@@ -64,6 +64,51 @@ public class AppointmentController {
     }
     return "Appointment "+ id +" succesfully deleted!";
   }
+
+@RequestMapping("/get-by-user/{username}")
+@ResponseBody
+public String byUser(@PathVariable("username") String username) {
+	  //Faire un toString de appointment
+	String aptId = "";
+  try {
+
+  	List<Appointment> appoints = appointmentDao.findAll();
+  	for(Appointment apt : appoints) {
+  		if(apt.getUs().getName().equals(username))
+  			aptId += apt.toString();
+  	}
+  }
+  catch (Exception ex) {
+    return "Error deleting the appointment:" + ex.toString();
+  }
+  if(!aptId.isBlank())
+	  return username + " appointment(s) succesfully found!" + "</br>" + aptId;
+  return "No appointment found for " + username;
+}
+
+@RequestMapping("/get-by-worker/{workername}")
+@ResponseBody
+public String byWorker(@PathVariable("workername") String workername) {
+	  //Faire un toString de appointment
+	String aptId = "";
+  try {
+
+  	List<Appointment> appoints = appointmentDao.findAll();
+  	for(Appointment apt : appoints) {
+  		if(apt.getWork().getName().equals(workername))
+  			aptId += apt.toString();
+  	}
+  	
+  }
+  catch (Exception ex) {
+    return "Error deleting the appointment:" + ex.toString();
+  }
+  if(!aptId.isBlank())
+	  return workername + " appointment(s) succesfully found!" + "</br>" + aptId;
+  return "No appointment found for " + workername;
+}
+
+
   
   @RequestMapping("/get-all/")
   @ResponseBody
@@ -72,8 +117,7 @@ public class AppointmentController {
     try {
       List<Appointment> appoints = appointmentDao.findAll();
       for(Appointment apt : appoints)
-      aptId += String.valueOf(apt.getId())+ " | RDV Le " + apt.getDate() + " de " + apt.getUs().getName() +
-      " avec " + apt.getWork().getName() + "<br>" + "Motif :" + apt.getDescription() + "<br>";
+      aptId += apt.toString();
       //userId = "curtis.klomegan@gmail.fr"
     }
     catch (Exception ex) {
