@@ -28,6 +28,7 @@ public class UserController {
     try {
      if(userDao.findByEmail(email) == null) {
       User user = new User(email, name, mdp);
+      System.out.println(user.getId());
       userDao.save(user);
       userId = String.valueOf(user.getId());
      // us = user;

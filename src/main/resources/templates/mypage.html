@@ -34,7 +34,20 @@
             </tr>
             </tbody> -->
           </table>
+          
         </form>
+        
+                 <table border="1">
+            <tr>
+               <th>email</th>
+               <th>name</th>
+            </tr>
+            <tr th:each ="user : ${users}">
+               <td th:utext="${user.email}">...</td>
+               <td th:utext="${user.name}">...</td>
+            </tr>
+         </table>
+        
         <br>
     	<input type="button" onclick="window.location.href = 'myhome.html';" value="Prendre un rendez-vous"/>
     </body>

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<html>
     <head>
         <meta charset="utf-8" />
         <title>Titre</title>
@@ -8,21 +7,34 @@
 
     <body>
     	<h1>Veuillez remplir les informations suivantes:</h1>
-    	
-    	<p>Adresse mail:</p>
-    	<input type="text" id="mail" name="mail">
+		
+	<form action="#" th:action= "@{/inscription2}" th:object= "${userForm}" method="post"> 
+	<!-- 	<form action=""> -->
+<!-- 			<p>Adresse mail: </p>
+			<input type="text" > -->
+			 <p>Adresse mail: </p>
+			<input type="text" th:field="*{email}" >
+			<p>Prénom et nom:</p>
+			<input type="text" th:field="*{name}"  >
+			<p>Mot de passe:</p>
+			<input type="text"  th:field="*{password}" >
+    		<!-- <input type="text" id="mdp" name="mdp" th:field="*{userForm.mdp}" > -->
+    	<!-- 	<p>Profession:</p>
+    		<input type="text"  placeholder="Pour les professionnels" id="prof" name="prof"> -->
+			<br><br>
+			<input type="submit" value="S'inscrire" />
+<!-- 		<input class="favorite styled" type="button" onclick="window.location.href = 'mypage';" value="S'incrire"> MARCHE mais ne prd pas le form  -->
+		<!-- 	<input class="favorite styled" type="submit" onclick="window.location.href = 'mypage';" value="S'inscrire">  eeror 404--> 
+		</form>
+		
+<!-- 		<form action= "#" th:action= "@/msg)" th:object= "${newMessage )" method-"post"
+			<p>Author: </p>
+			<input type="text" th:field"(author) ">
+			<p>Message: </p>
+			<input type-"text" th:field-"* (message) ">
+			<input type="submit" value="Send">
+		</form> -->
 
-    	<p>Prénom et nom:</p>
-    	<input type="text" id="name" name="name">
-
-    	<p>Mot de passe:</p>
-    	<input type="text" id="mdp" name="mdp">
-
-    	<p>Profession:</p>
-    	<input type="text"  placeholder="Pour les professionnels" id="prof" name="prof">
-
-		<br><br>
-
-       <input class="favorite styled" type="button" onclick="window.location.href = 'mypage';" value="S'inscrire">
+       
     </body>
 </html> 
