@@ -110,4 +110,9 @@ public void setAppoint(List<Appointment> appoint) {
   // Getter and setter methods
   // ...
 
+//public User orElseThrow(Object object) {
+//	// TODO Auto-generated method stub
+//	return null;
+//}
+
 }

@@ -22,6 +22,17 @@ import sample.data.jpa.service.UserDao;
 @Controller
 public class IndexController {	
 	
+	@Autowired
+	private  UserDao userDao;
+	
+	@Autowired
+	private  AppointmentDao appointmentDao;
+	
+	private String welcomeMessage;
+	private String errorMessage;
+
+	private long connectedUser;
+	
 	@GetMapping("/")
 	public String index() {
 		return "page1.html";
@@ -40,9 +51,15 @@ public class IndexController {
 	}
 	
 	@PostMapping("/inscription2")
-	public String savePerson(Model model, @ModelAttribute("user") User user) {	
+	public String saveUser(Model model, @ModelAttribute("user") User user) {
+		String mail = user.getEmail();
+
+		if (userDao.findByEmail(mail) == null) {
 			userDao.save(user);
-			return "redirect:mypage";
+			return "redirect:connection";
+		}
+		model.addAttribute("errorMessage", "Wesh pelo, le mail est déjà utilisé");
+		return "inscription2";
 	}
 	
 	@GetMapping("/prendreRdv")
@@ -54,25 +71,60 @@ public class IndexController {
 	
 	@PostMapping("/prendreRdv")
 	public String saveRDV(Model model, @ModelAttribute("appoint") Appointment appoint) {
-			AppaintmentDao.save(appoint);
+			appointmentDao.save(appoint);
 			return "redirect:mypage";
 	}
 
 	@GetMapping("/connection")
-	public String connect() { 
-		return "connection"; //peut-être connection tout court
+	public String connect(Model model) {
+		User user = new User();
+		model.addAttribute("user", user);
+		return "connection";
 	}
 
-	@GetMapping("/mypage")
-	public String acc1(Model model) {
-		model.addAttribute("reus", AppaintmentDao.findAll());
-		//model.addAttribute("users", users);
-		return "mypage"; //peut-être connection tout court
+	@PostMapping("/connection")
+	public String connectUser(Model model, @ModelAttribute("user") User user) {
+		String mail = user.getEmail();
+		String mdp = user.getPassword();
+		try {
+			User userTemp = userDao.findByEmail(mail);
+			if (!userTemp.getPassword().equals(mdp)) {
+				model.addAttribute("errorMessage", "Wesh pelo, Mauvais mdp fdp !");
+				return "connection";
+			}
+		} catch (Exception ex) {
+			model.addAttribute("errorMessage", "Wesh pelo, le mail est pas dans la base, tu veux t'inscrire ?");
+			return "connection";
+		}
+		connectedUser = user.getId();
+		return "redirect:mypage";
 	}
 	
-	@Autowired
-	private  UserDao userDao;
+//	@GetMapping("/mypage")
+//	public String acc(Model model) {
+//		model.addAttribute("users", userDao.findAll());
+//		return "mypage";
+//	}
 	
-	@Autowired
-	private  AppointmentDao AppaintmentDao;
+	  @RequestMapping("/get-by-user")
+	  @ResponseBody
+	  public String aptByUser(long id) {
+	    try {
+	    	//User us = userDao
+	      Appointment appointment = appointmentDao.findById(id).get();
+	      appointmentDao.delete(appointment);
+	    }
+	    catch (Exception ex) {
+	      return "Error deleting the appointment:" + ex.toString();
+	    }
+	    return "Appointment "+ id +" succesfully deleted!";
+	  }
+	  
+	@GetMapping("/mypage")
+    public String acc(Model model) {
+       // model.addAttribute("reus", aptByUser(connectedUser));
+        model.addAttribute("reus", appointmentDao.findAll());
+        return "mypage"; 
+    }
+
 }

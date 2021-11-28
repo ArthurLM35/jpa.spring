@@ -8,14 +8,21 @@
 
     <body>
 <h1>Connection à Doctolib</h1>
-
+	
+		<form action="#" th:action= "@{/connection}" th:object= "${user}" method="post"> 
+		
     	<p>Nom d'utilisation:</p>
-    	<input type="text" id="name" name="name" required minlength="4" maxlength="8" size="10">
-
+    	<input type="text" th:field="*{email}" >
+ 
     	<p>Mot de passe:</p>
-    	<input type="text" id="name" name="name" required minlength="4" maxlength="8" size="10">
-
+    	<input type="text" th:field="*{password}" >
     	<br><br>
-    	<input class="favorite styled" type="button" onclick="window.location.href = 'mypage';" value="Se connecter">
+    	<input class="favorite styled" type="submit" onclick="window.location.href = 'mypage';" value="Se connecter">
+		</form>
+    	
+    	<br><br>
+		<div th:if="${errorMessage}" th:utext="${errorMessage}"
+         style="color:red;font-style:italic;">
+         </div>
     </body>
 </html>
