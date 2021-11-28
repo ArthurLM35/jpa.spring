@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import sample.data.jpa.domain.User;
-import sample.data.jpa.form.UserForm;
 import sample.data.jpa.service.UserDao;
 
 @Controller
@@ -31,14 +30,21 @@ public class IndexController {
 	
 
 	
+//	@GetMapping("/inscription2")
+//	public String insc(Model model) {
+//		System.out.println("SALUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUT");
+//		UserForm userForm = new UserForm();
+//		model.addAttribute("userForm", userForm); 
+//		return "inscription2.html";
+//	}
+
 	@GetMapping("/inscription2")
 	public String insc(Model model) {
 		System.out.println("SALUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUT");
-		UserForm userForm = new UserForm();
-		model.addAttribute("userForm", userForm); 
+		User user = new User();
+		model.addAttribute("user", user); 
 		return "inscription2.html";
 	}
-	
 //	@PostMapping("/inscription2")
 //	public String getInsc(@ModelAttribute User newUser) {
 //		User user = new User(newUser.getEmail(),newUser.getName(),newUser.getPassword());
@@ -61,28 +67,49 @@ public class IndexController {
 //			return "redirect:mypage.html";
 //		}
 	
+//	@PostMapping("/inscription2")
+//	public String savePerson(Model model, @ModelAttribute("userForm") UserForm userForm) {
+//		System.out.println("JE SUIS LA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+//		String mail = userForm.getEmail();
+//		System.out.println(mail);
+//		String name = userForm.getName();
+//		System.out.println(name);
+//		String mdp = userForm.getPassword();
+//		System.out.println(mdp);
+//		
+//		System.out.println(userForm.toString());
+//			User newUser = new User(mail,name,mdp);
+//			//newUser.setId(29);
+//			System.out.println(newUser.toString());
+//			//users.add(newUser);
+//			userDao.save(newUser);
+//			System.out.println(newUser.toString());
+//			//System.out.println(users.toString());
+//			System.out.println("FINITO PIPO");
+//			return "redirect:mypage";
+//	}
+	
 	@PostMapping("/inscription2")
-	public String savePerson(Model model, @ModelAttribute("userForm") UserForm userForm) {
+	public String savePerson(Model model, @ModelAttribute("user") User user) {
 		System.out.println("JE SUIS LA !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		String mail = userForm.getEmail();
+		String mail = user.getEmail();
 		System.out.println(mail);
-		String name = userForm.getName();
+		String name = user.getName();
 		System.out.println(name);
-		String mdp = userForm.getPassword();
+		String mdp = user.getPassword();
 		System.out.println(mdp);
 		
-		System.out.println(userForm.toString());
-			User newUser = new User(mail,name,mdp);
+		System.out.println(user.toString());
+			//User newUser = new User(mail,name,mdp);
 			//newUser.setId(29);
-			System.out.println(newUser.toString());
+			//System.out.println(newUser.toString());
 			//users.add(newUser);
-			userDao.save(newUser);
-			System.out.println(newUser.toString());
+			userDao.save(user);
+			//System.out.println(newUser.toString());
 			//System.out.println(users.toString());
 			System.out.println("FINITO PIPO");
 			return "redirect:mypage";
 	}
-	
 //	@ExceptionHandler({})
 //    public void handleException() {
 //		
