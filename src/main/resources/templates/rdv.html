@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8" />
+        <title>Titre</title>
+    </head>
+
+    <body>
+    	<h1>Veuillez remplir les informations suivantes pour prendre un rendez-vous:</h1>
+		
+	<form action="#" th:action= "@{/prendreRdv}" th:object= "${appoint}" method="post"> 
+			<p>Date: </p>
+			<input type="text" >
+			<p>Temps:</p>
+			<input type="text"   >
+			<p>Client:</p>
+			<input type="text"  >
+			<p>Médecin:</p>
+			<input type="text"  >
+			<p>Description:</p>
+			<input type="text"  >
+			<br><br>
+			<input type="submit" value="Prendre un rendez-vous" />
+		</form>       
+    </body>
+</html> 
+

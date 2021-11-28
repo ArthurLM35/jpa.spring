@@ -11,7 +11,7 @@
     <br>
         <h2>Informations de votre compte</h2>   
     	<br>
-        <form action="/userinfo" method="get">
+        <form method="get">
           <table class="table table-hover">
             <thead>
             <tr>
@@ -23,32 +23,21 @@
               <th scope="col">Description</th>
             </tr>
             </thead>
-   <!--          <tbody>
-            <tr  >
-              <td th:text="${u.}"></td>
-              <td th:text="${u.}"></td>
-              <td th:text="${u.}"></td>
-              <td th:text="${u.}"></td>
-              <td th:text="${u.}"></td>
-              <td th:text="${u.}"></td>
+             <tbody>
+            <tr th:each ="reu : ${reus}">
+              <td th:text="${reu.date}"></td>
+              <td th:text="${reu.date}"></td>
+              <td th:text="${reu.lenght}"></td>
+              <td th:text="${reu.us.name}"></td>
+              <td th:text="${reu.work.name}"></td>
+              <td th:text="${reu.description}"></td>
             </tr>
-            </tbody> -->
+            </tbody>
           </table>
           
         </form>
-        
-                 <table border="1">
-            <tr>
-               <th>email</th>
-               <th>name</th>
-            </tr>
-            <tr th:each ="user : ${users}">
-               <td th:utext="${user.email}">...</td>
-               <td th:utext="${user.name}">...</td>
-            </tr>
-         </table>
-        
+            
         <br>
-    	<input type="button" onclick="window.location.href = 'myhome.html';" value="Prendre un rendez-vous"/>
+    	<input type="button" onclick="window.location.href = 'rdv';" value="Prendre un rendez-vous"/>
     </body>
 </html>  
