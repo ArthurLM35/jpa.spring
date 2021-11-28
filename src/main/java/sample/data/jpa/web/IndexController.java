@@ -42,6 +42,11 @@ public class IndexController {
 	public String rdv() {
 		return "rdv.html";
 	}
+	
+	@GetMapping("/deco")
+	public String deco() {
+		return "page1.html";
+	}
 
 	@GetMapping("/inscription2")
 	public String insc(Model model) {
@@ -83,22 +88,22 @@ public class IndexController {
 	}
 
 	@PostMapping("/connection")
-	public String connectUser(Model model, @ModelAttribute("user") User user) {
-		String mail = user.getEmail();
-		String mdp = user.getPassword();
-		try {
-			User userTemp = userDao.findByEmail(mail);
-			if (!userTemp.getPassword().equals(mdp)) {
-				model.addAttribute("errorMessage", "Wesh pelo, Mauvais mdp fdp !");
-				return "connection";
-			}
-		} catch (Exception ex) {
-			model.addAttribute("errorMessage", "Wesh pelo, le mail est pas dans la base, tu veux t'inscrire ?");
-			return "connection";
-		}
-		connectedUser = user.getId();
-		return "redirect:mypage";
-	}
+    public String connectUser(Model model, @ModelAttribute("user") User user) {
+        String mail = user.getEmail();
+        String mdp = user.getPassword();
+        try {
+            User userTemp = userDao.findByEmail(mail);
+            if (!userTemp.getPassword().equals(mdp)) {
+                model.addAttribute("errorMessage", "Wesh pelo, Mauvais mdp fdp !");
+                return "connection";
+            }
+            connectedUser = userTemp.getId();
+        } catch (Exception ex) {
+            model.addAttribute("errorMessage", "Wesh pelo, le mail est pas dans la base, tu veux t'inscrire ?");
+            return "connection";
+        }
+        return "redirect:mypage";
+    } 
 	
 //	@GetMapping("/mypage")
 //	public String acc(Model model) {
@@ -122,9 +127,20 @@ public class IndexController {
 	  
 	@GetMapping("/mypage")
     public String acc(Model model) {
-       // model.addAttribute("reus", aptByUser(connectedUser));
-        model.addAttribute("reus", appointmentDao.findAll());
+       // model.addAttribute("reus", aptByUser(connectedUser));		
+		List<Appointment> appaintmentDao = new ArrayList<>();
+		for(Appointment d : appointmentDao.findAll()) {
+			System.out.println(connectedUser);
+			if(d.getUs().getId() == connectedUser) {
+				System.out.println("zertyukhgfdesfg");
+				appaintmentDao.add(d);
+			}
+		}
+		System.out.println(appaintmentDao.size());
+        model.addAttribute("reus", appaintmentDao);
         return "mypage"; 
     }
+	
+	
 
 }
