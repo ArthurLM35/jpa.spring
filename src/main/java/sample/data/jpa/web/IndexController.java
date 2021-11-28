@@ -130,13 +130,10 @@ public class IndexController {
        // model.addAttribute("reus", aptByUser(connectedUser));		
 		List<Appointment> appaintmentDao = new ArrayList<>();
 		for(Appointment d : appointmentDao.findAll()) {
-			System.out.println(connectedUser);
-			if(d.getUs().getId() == connectedUser) {
-				System.out.println("zertyukhgfdesfg");
+			if(d.getUs().getId() == connectedUser || d.getWork().getId() == connectedUser) {
 				appaintmentDao.add(d);
 			}
 		}
-		System.out.println(appaintmentDao.size());
         model.addAttribute("reus", appaintmentDao);
         return "mypage"; 
     }
