@@ -9,20 +9,21 @@
     <body>
     	<h1>Veuillez remplir les informations suivantes:</h1>
 
-    	<p>Prénom et nom:</p>
-    	<input type="text" id="name" name="name">
-
-    	<p>Adresse mail:</p>
-    	<input type="text" id="mail" name="mail">
-
-    	<p>Mot de passe:</p>
-    	<input type="text" id="mdp" name="mdp">
-
-    	<p>Profession:</p>
-    	<input type="text"  placeholder="Pour les professionnels" id="prof" name="prof">
-
+    	<form action="#" th:action= "@{/inscription}" th:object= "${worker}" method="post"> 
+			<p>Adresse mail: </p>
+			<input type="text" th:field="*{email}" >
+			<p>Nom et Prénom: </p>
+			<input type="text" th:field="*{name}" >	
+			<p>Mot de passe:</p>
+			<input type="text"  th:field="*{password}" >
+			<p>Travail:</p>
+			<input type="text" th:field="*{job}"  >					
+			<br><br>
+			<input type="submit" value="S'inscrire" />
+		</form>       
 		<br><br>
-
-       <input class="favorite styled" type="button" onclick="window.location.href = 'connection.html';" value="S'incrire">
+		<div th:if="${errorMessage}" th:utext="${errorMessage}"
+         style="color:red;font-style:italic;">
+         </div>
     </body>
 </html> 

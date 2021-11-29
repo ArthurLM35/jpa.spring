@@ -15,32 +15,28 @@ import org.springframework.lang.NonNull;
 public class Worker extends  User{
 
 
-  @NonNull
-  private String job;
+	@NonNull
+	private String job;
   
-  public Worker() { }
+	public Worker() { super();}
 
   
-  public Worker(String name, String password, String email, String job) {
-	  super(email,name,password);
-    this.job = job;  
-  }
+	public Worker(String name, String password, String email, String job) {
+		super(name,email,password);
+		this.job = job;  
+	}
 
 
-public Worker(long id) {
-	// TODO Auto-generated constructor stub
-}
+	public Worker(long id) {
+		// TODO Auto-generated constructor stub
+	}
 
+	public String getJob() {
+		return job;
+	}
 
-public String getJob() {
-	return job;
-}
-
-public void setName(String job) {
-	this.job = job;
-}
-
-  // Getter and setter methods
-  // ...
+	public void setName(String job) {
+		this.job = job;
+	}
 
 }

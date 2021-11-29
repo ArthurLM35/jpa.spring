@@ -51,10 +51,10 @@ public class User {
     this.id = id;
   }
   
-  public User(String email, String name, String password) {
-    this.email = email;
-    this.name = name;
-    this.password = password;
+  public User(String name, String email, String password) {
+	  this.name = name;
+	  this.email = email;
+	  this.password = password;
   }
 
 public long getId() {

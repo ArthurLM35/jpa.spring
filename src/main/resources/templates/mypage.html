@@ -11,7 +11,7 @@
     <br>
         <h2>Informations de votre compte</h2>   
     	<br>
-        <form method="get">
+        <form form action="/delete" method="delete">
           <table class="table table-hover">
             <thead>
             <tr>
@@ -31,6 +31,9 @@
               <td th:text="${reu.us.name}"></td>
               <td th:text="${reu.work.name}"></td>
               <td th:text="${reu.description}"></td>
+              <td >
+        		<a th:href="@{/delete{id}(id=${reu.getId()})}" class="btn btn-danger">Annuler le rendez-vous</a>
+      		  </td>
             </tr>
             </tbody>
           </table>

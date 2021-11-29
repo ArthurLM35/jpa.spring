@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -48,7 +49,7 @@ public class AppointmentController {
     catch (Exception ex) {
       return "Error deleting the appointment:" + ex.toString();
     }
-    return "Appointment "+ id +" succesfully deleted!";
+    return "redirect:myhome";
   }
   
   @RequestMapping("/get-by-user")
@@ -198,6 +199,11 @@ public String byWorker(@PathVariable("workername") String workername) {
     }
     return "appointment succesfully updated!";
   }
+  
+  @GetMapping("/deco")
+	public String deco() {
+		return "page1.html";
+	}
 
   // Private fields
 

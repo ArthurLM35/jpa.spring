@@ -16,14 +16,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import sample.data.jpa.domain.Appointment;
 import sample.data.jpa.domain.User;
+import sample.data.jpa.domain.Worker;
 import sample.data.jpa.service.AppointmentDao;
 import sample.data.jpa.service.UserDao;
+import sample.data.jpa.service.WorkerDao;
 
 @Controller
 public class IndexController {	
 	
 	@Autowired
 	private  UserDao userDao;
+	
+	@Autowired
+	private  WorkerDao workerDao;
 	
 	@Autowired
 	private  AppointmentDao appointmentDao;
@@ -51,7 +56,7 @@ public class IndexController {
 	@GetMapping("/inscription2")
 	public String insc(Model model) {
 		User user = new User();
-		model.addAttribute("user", user); 
+		model.addAttribute("user", user);
 		return "inscription2.html";
 	}
 	
@@ -65,6 +70,25 @@ public class IndexController {
 		}
 		model.addAttribute("errorMessage", "Wesh pelo, le mail est déjà utilisé");
 		return "inscription2";
+	}
+	
+	@GetMapping("/inscription")
+	public String inscP(Model model) {
+		Worker worker = new Worker();
+		model.addAttribute("worker", worker);
+		return "inscription.html";
+	}
+	
+	@PostMapping("/inscription")
+	public String saveWorker(Model model, @ModelAttribute("worker") Worker worker) {
+		String mail = worker.getEmail();
+
+		if (workerDao.findByEmail(mail) == null) {
+			workerDao.save(worker);
+			return "redirect:connection";
+		}
+		model.addAttribute("errorMessage", "Wesh pelo, le mail est déjà utilisé");
+		return "inscription";
 	}
 	
 	@GetMapping("/prendreRdv")
@@ -130,6 +154,7 @@ public class IndexController {
        // model.addAttribute("reus", aptByUser(connectedUser));		
 		List<Appointment> appaintmentDao = new ArrayList<>();
 		for(Appointment d : appointmentDao.findAll()) {
+
 			if(d.getUs().getId() == connectedUser || d.getWork().getId() == connectedUser) {
 				appaintmentDao.add(d);
 			}
@@ -137,6 +162,20 @@ public class IndexController {
         model.addAttribute("reus", appaintmentDao);
         return "mypage"; 
     }
+	
+	 @RequestMapping("/delete")
+	  @ResponseBody
+	  public String delete(long id) {
+		 System.out.println("azergthyujk,tygr");
+	    try {
+	      Appointment appointment = appointmentDao.findById(id).get();
+	      appointmentDao.delete(appointment);
+	    }
+	    catch (Exception ex) {
+	      return "Error deleting the appointment:" + ex.toString();
+	    }
+	    return "redirect:myhome";
+	  }
 	
 	
 
