@@ -6,18 +6,27 @@
     </head>
 
     <body>
-    	<h1>Veuillez remplir les informations suivantes pour prendre un rendez-vous:</h1>
+    	<h1>Veuillez remplir les informations suivantes pour prendre un rendez-vous:</h1> 
 		
+<!-- AFFICHER LE USER  -->		
+		<p>Client:</p>
+		<input th:text="${user}">
+<!-- SELECTION WORKER PAR LISTE DEROULANTE -->		
+		<p>Médecin:</p>
+		<input type="text"  >
+<!--  DATE SELECTION ADEQUATE OPTIONNEL -->
+<!-- <input id="date" type="date" value="2017-06-01"> -->
+
+<!-- LENGHT VALEUR PRéDéFINI 30/60 OPTIONNEL -->
+
+<!-- DESCRIPTION MENU DEROULANT AVEC CAS AUTRE OPTIONNEL -->
 	<form action="#" th:action= "@{/prendreRdv}" th:object= "${appoint}" method="post"> 
 			<p>Date: </p>
-			<!-- <input id="date" type="date" value="2017-06-01"> -->
+			
 			<input type="text" th:field="*{date}" >
 			<p>Temps:</p>
 			<input type="number" th:field="*{lenght}" >
-			<p>Client:</p>
-			<input type="text"  th:field="*{us}" >
-			<p>Médecin:</p>
-			<input type="text" th:field="*{work}" >
+			
 			<p>Description:</p>
 			<input type="text"  th:field="*{description}" >>
 			<br><br>

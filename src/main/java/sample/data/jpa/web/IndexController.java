@@ -47,6 +47,7 @@ public class IndexController {
 
 	@GetMapping("/rdv")
 	public String rdv(Model model) {
+		model.addAttribute("user", userDao.getById(connectedUser).getName());
 		Appointment appoint = new Appointment();
 		model.addAttribute("appoint", appoint); 
 		return "rdv";
@@ -56,9 +57,13 @@ public class IndexController {
 	@PostMapping("/prendreRdv")
 	public String saveRDV(Model model, @ModelAttribute("appoint") Appointment appoint) {
 		String date = appoint.getDate();
-		int length = appoint.getLenght();
-		User us = appoint.getUs();
+		//Date date = appoint.getDate(); // VOIR SI CALENDRIER
+		//int length = appoint.getLenght();
+		appoint.setLenght(30); // VOIR SI PAS 29 MIN POUR EVITER ERREUR/ 8 12 à 14 18
+		//User us = appoint.getUs();
+		User us = userDao.getById(connectedUser);
 		Worker wrk = appoint.getWork();
+		//Worker wrk = appoint.getWork();
 		String desc = appoint.getDescription();
 		
 		//if (userDao.findById(us.getId()) == null || workerDao.findById(wrk.getId())==null) {
@@ -173,6 +178,7 @@ public class IndexController {
 	@GetMapping("/mypage")
 	public String acc(Model model) {
 		// model.addAttribute("reus", aptByUser(connectedUser));
+		model.addAttribute("welcomeMessage", "Bienvenue " + userDao.getById(connectedUser).getName());
 		List<Appointment> appaintmentDao = new ArrayList<>();
 		for (Appointment d : appointmentDao.findAll()) {
 
