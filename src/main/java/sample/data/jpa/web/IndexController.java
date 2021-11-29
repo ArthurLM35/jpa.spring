@@ -100,7 +100,6 @@ public class IndexController {
 	@PostMapping("/inscription")
 	public String saveWorker(Model model, @ModelAttribute("worker") Worker worker) {
 		String mail = worker.getEmail();
-
 		if (workerDao.findByEmail(mail) == null) {
 			workerDao.save(worker);
 			return "redirect:connection";
@@ -192,20 +191,16 @@ public class IndexController {
 //	      return "Error deleting the appointment:" + ex.toString();
 //	    }
 //	  }
-
-	 @RequestMapping(value = "/delete/{id}", method = { RequestMethod.GET, RequestMethod.POST })
-	//@DeleteMapping("/delete/{id}")
-	@ResponseBody
-	public void delete(@PathVariable("id") long id) {
-		System.out.println("azergthyujk,tygr");
+	@GetMapping(value = "/delete/{id}")
+	public String delete(@PathVariable("id") long id) {
 		try {
 			Appointment appointment = appointmentDao.findById(id).get();
-			appointmentDao.delete(appointment);
+			appointmentDao.delete(appointment);		
 			
 		} catch (Exception ex) {
-			//return "Error deleting the appointment:" + ex.toString();
+			return "Error deleting the appointment:" + ex.toString();
 		}
-		
+		return "redirect:/mypage";
 	}
 
 }

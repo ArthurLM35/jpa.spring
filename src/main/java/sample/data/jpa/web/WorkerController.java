@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import sample.data.jpa.domain.User;
 import sample.data.jpa.domain.Worker;
 import sample.data.jpa.service.WorkerDao;
 

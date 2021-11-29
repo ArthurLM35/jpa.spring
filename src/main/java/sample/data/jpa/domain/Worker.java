@@ -1,34 +1,29 @@
 package sample.data.jpa.domain;
-// Imports ...
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
-//import javax.validation.constraints.NotNull;
 
-import org.springframework.lang.NonNull;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Worker")
-public class Worker extends  User{
+public class Worker extends User{
 
 
-	@NonNull
+	@NotNull
 	private String job;
   
-	public Worker() { super();}
-
-  
-	public Worker(String name, String password, String email, String job) {
-		super(name,email,password);
-		this.job = job;  
+	public Worker() { 
+		super();
 	}
-
-
-	public Worker(long id) {
-		// TODO Auto-generated constructor stub
+  
+	public Worker(String name, String password, String email, String job) {		
+		super(name,email,password);
+		System.out.println(name);
+		System.out.println(password);
+		System.out.println(email);
+		System.out.println(job);
+		this.job = job;  
 	}
 
 	public String getJob() {
@@ -38,5 +33,4 @@ public class Worker extends  User{
 	public void setName(String job) {
 		this.job = job;
 	}
-
 }
