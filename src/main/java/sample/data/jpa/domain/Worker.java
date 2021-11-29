@@ -19,10 +19,6 @@ public class Worker extends User{
   
 	public Worker(String name, String password, String email, String job) {		
 		super(name,email,password);
-		System.out.println(name);
-		System.out.println(password);
-		System.out.println(email);
-		System.out.println(job);
 		this.job = job;  
 	}
 

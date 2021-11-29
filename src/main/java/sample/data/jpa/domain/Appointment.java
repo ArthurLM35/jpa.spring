@@ -17,6 +17,9 @@ public class Appointment {
 	private long id;
 	
 	@NotNull
+	private int creneau;
+	
+	@NotNull
 	private String date;
 	
 	private int lenght;
@@ -51,6 +54,14 @@ public class Appointment {
 		this.id = id;
 	}
 	
+	public double getCreneau() {
+		return creneau;
+	}
+
+	public void setCreneau(int creneau) {
+		this.creneau = creneau;
+	}
+
 	public String getDate() {
 		return date;
 	}
