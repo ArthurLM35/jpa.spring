@@ -12,15 +12,18 @@
 	<!-- 	<p>Client:</p>
 		<input th:text="${user}">  ça marche --> 
 <!-- SELECTION WORKER PAR LISTE DEROULANTE -->		
-		<p>Médecin:</p>
-		<div class="col-lg-3" th:object="${worker}">
-    <select class="form-control" id="testOrder" name="testOrder">
-        <option value="">Sélectionnez un médecin</option>
-        <option th:each="worker : ${workers}"
-                th:value="${worker.name}"
-                th:text="${test.testCode}+' : '+${test.testName}"></option>
-    </select>
-</div>
+
+<!--   <div class="form-group">
+     <label class="col-md-3 control-label">Sélectionnez un médecin</label>
+         <div class="col-md-5">
+             <select th:field="*{work}" >
+                 <option th:each="worker : ${workers}"
+                                 th:value="${worker}"
+                                 th:text="${worker.name}+' : '+${worker.job}" />
+             </select>
+        </div>
+   </div> -->
+ 
 <!--  DATE SELECTION ADEQUATE OPTIONNEL -->
 <!-- <input id="date" type="date" value="2017-06-01"> -->
 
@@ -28,14 +31,26 @@
 
 <!-- DESCRIPTION MENU DEROULANT AVEC CAS AUTRE OPTIONNEL -->
 	<form action="#" th:action= "@{/prendreRdv}" th:object= "${appoint}" method="post"> 
-			<p>Date: </p>
+	
+	  <div class="form-group">
+     <label class="col-md-3 control-label">Sélectionnez un médecin</label>
+         <div class="col-md-5">
+             <select th:field="*{work}" >
+                 <option th:each="worker : ${workers}"
+                                 th:value="${worker}"                    
+                                 th:text="${worker}"/>
+                                  <!-- th:text="${worker.name}+' : '+${worker.job}" --> 
+             </select>
+        </div>
+   </div>
+		<!-- 	<p>Date: </p>
 			
 			<input type="text" th:field="*{date}" >
 			<p>Temps:</p>
 			<input type="number" th:field="*{lenght}" >
 			
 			<p>Description:</p>
-			<input type="text"  th:field="*{description}" >>
+			<input type="text"  th:field="*{description}" > -->
 			<br><br>
 			<input type="submit" onclick="window.location.href = 'mypage';" value="Prendre un rendez-vous" />
 		</form>       

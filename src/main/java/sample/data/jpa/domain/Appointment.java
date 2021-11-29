@@ -16,8 +16,8 @@ public class Appointment {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
-	@NotNull
-	private int creneau;
+//	@NotNull
+//	private int creneau;
 	
 	@NotNull
 	private String date;
@@ -54,13 +54,13 @@ public class Appointment {
 		this.id = id;
 	}
 	
-	public double getCreneau() {
-		return creneau;
-	}
-
-	public void setCreneau(int creneau) {
-		this.creneau = creneau;
-	}
+//	public double getCreneau() {
+//		return creneau;
+//	}
+//
+//	public void setCreneau(int creneau) {
+//		this.creneau = creneau;
+//	}
 
 	public String getDate() {
 		return date;

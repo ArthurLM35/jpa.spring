@@ -48,6 +48,8 @@ public class IndexController {
 	@GetMapping("/rdv")
 	public String rdv(Model model) {
 		//model.addAttribute("user", userDao.getById(connectedUser).getName()); ça marche
+	    List<Worker> workers = workerDao.findAll();
+	    model.addAttribute("workers", workers);
 		Appointment appoint = new Appointment();
 		model.addAttribute("appoint", appoint); 
 		return "rdv";
@@ -56,19 +58,20 @@ public class IndexController {
 	// VOIR LE SOUCIS RECUPéRATION D'UN STRING AU LIEU DU USER/WORKER
 	@PostMapping("/prendreRdv")
 	public String saveRDV(Model model, @ModelAttribute("appoint") Appointment appoint) {
-		String date = appoint.getDate();
-		//Date date = appoint.getDate(); // VOIR SI CALENDRIER
+		//String date = appoint.getDate();
+							//Date date = appoint.getDate(); // VOIR SI CALENDRIER
 		//int length = appoint.getLenght();
-		appoint.setLenght(30); // VOIR SI PAS 29 MIN POUR EVITER ERREUR/ 8 12 à 14 18
-		//User us = appoint.getUs();
+							//appoint.setLenght(30); // VOIR SI PAS 29 MIN POUR EVITER ERREUR/ 8 12 à 14 18
 		User us = userDao.getById(connectedUser);
-		Worker wrk = appoint.getWork();
+		System.out.println(appoint.getWork().toString());
 		//Worker wrk = appoint.getWork();
-		String desc = appoint.getDescription();
+							//Worker wrk = appoint.getWork();
+		//String desc = appoint.getDescription();
 		
 		//if (userDao.findById(us.getId()) == null || workerDao.findById(wrk.getId())==null) {
-			appointmentDao.save(appoint);
-			return "redirect:mypage";
+			//appointmentDao.save(appoint);
+			//return "redirect:mypage";
+			return "rdv";
 	}
 	
 	@GetMapping("/deco")
