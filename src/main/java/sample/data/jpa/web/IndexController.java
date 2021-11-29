@@ -117,8 +117,13 @@ public class IndexController {
 
 //	@PostMapping("/prendreRdv")
 //	public String saveRDV(Model model, @ModelAttribute("appoint") Appointment appoint) {
-//		appointmentDao.save(appoint);
-//		return "redirect:mypage";
+//		if(){
+//			appointmentDao.save(appoint);
+//			return "redirect:mypage";
+//		}
+//		else{
+//			return "Vous êtes connecté avec votre compte professionnel, vous ne pouvez pas prendre de rdv!";
+//		}
 //	}
 
 	@GetMapping("/connection")
@@ -179,24 +184,11 @@ public class IndexController {
 		return "mypage";
 	}
 
-//	 @PostMapping("/delete/{id}", method = RequestMethod.POST))
-//	  public String delete(@PathVariable("id") long id) {
-//		 System.out.println("azergthyujk,tygr");
-//	    try {
-//	      Appointment appointment = appointmentDao.findById(id).get();
-//	      appointmentDao.delete(appointment);
-//	      return "redirect:mypage";
-//	    }
-//	    catch (Exception ex) {
-//	      return "Error deleting the appointment:" + ex.toString();
-//	    }
-//	  }
 	@GetMapping(value = "/delete/{id}")
 	public String delete(@PathVariable("id") long id) {
 		try {
 			Appointment appointment = appointmentDao.findById(id).get();
-			appointmentDao.delete(appointment);		
-			
+			appointmentDao.delete(appointment);					
 		} catch (Exception ex) {
 			return "Error deleting the appointment:" + ex.toString();
 		}
