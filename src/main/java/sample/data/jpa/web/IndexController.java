@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import sample.data.jpa.domain.Appointment;
@@ -163,18 +164,31 @@ public class IndexController {
         return "mypage"; 
     }
 	
-	 @RequestMapping("/delete")
+//	 @PostMapping("/delete/{id}", method = RequestMethod.POST))
+//	  public String delete(@PathVariable("id") long id) {
+//		 System.out.println("azergthyujk,tygr");
+//	    try {
+//	      Appointment appointment = appointmentDao.findById(id).get();
+//	      appointmentDao.delete(appointment);
+//	      return "redirect:mypage";
+//	    }
+//	    catch (Exception ex) {
+//	      return "Error deleting the appointment:" + ex.toString();
+//	    }
+//	  }
+
+	  //@RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
 	  @ResponseBody
-	  public String delete(long id) {
+	  public String delete(@PathVariable("id") long id) {
 		 System.out.println("azergthyujk,tygr");
 	    try {
 	      Appointment appointment = appointmentDao.findById(id).get();
 	      appointmentDao.delete(appointment);
+	      return "redirect:mypage";
 	    }
 	    catch (Exception ex) {
 	      return "Error deleting the appointment:" + ex.toString();
 	    }
-	    return "redirect:myhome";
 	  }
 	
 	

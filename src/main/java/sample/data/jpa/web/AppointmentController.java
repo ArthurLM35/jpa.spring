@@ -199,11 +199,6 @@ public String byWorker(@PathVariable("workername") String workername) {
     }
     return "appointment succesfully updated!";
   }
-  
-  @GetMapping("/deco")
-	public String deco() {
-		return "page1.html";
-	}
 
   // Private fields
 
