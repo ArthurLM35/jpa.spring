@@ -9,11 +9,18 @@
     	<h1>Veuillez remplir les informations suivantes pour prendre un rendez-vous:</h1> 
 		
 <!-- AFFICHER LE USER  -->		
-		<p>Client:</p>
-		<input th:text="${user}">
+	<!-- 	<p>Client:</p>
+		<input th:text="${user}">  ça marche --> 
 <!-- SELECTION WORKER PAR LISTE DEROULANTE -->		
 		<p>Médecin:</p>
-		<input type="text"  >
+		<div class="col-lg-3" th:object="${worker}">
+    <select class="form-control" id="testOrder" name="testOrder">
+        <option value="">Sélectionnez un médecin</option>
+        <option th:each="worker : ${workers}"
+                th:value="${worker.name}"
+                th:text="${test.testCode}+' : '+${test.testName}"></option>
+    </select>
+</div>
 <!--  DATE SELECTION ADEQUATE OPTIONNEL -->
 <!-- <input id="date" type="date" value="2017-06-01"> -->
 

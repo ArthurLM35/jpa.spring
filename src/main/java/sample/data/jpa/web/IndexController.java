@@ -47,7 +47,7 @@ public class IndexController {
 
 	@GetMapping("/rdv")
 	public String rdv(Model model) {
-		model.addAttribute("user", userDao.getById(connectedUser).getName());
+		//model.addAttribute("user", userDao.getById(connectedUser).getName()); ça marche
 		Appointment appoint = new Appointment();
 		model.addAttribute("appoint", appoint); 
 		return "rdv";
