@@ -10,17 +10,18 @@
 		
 	<form action="#" th:action= "@{/prendreRdv}" th:object= "${appoint}" method="post"> 
 			<p>Date: </p>
-			<input type="text" >
+			<!-- <input id="date" type="date" value="2017-06-01"> -->
+			<input type="text" th:field="*{date}" >
 			<p>Temps:</p>
-			<input type="text"   >
+			<input type="number" th:field="*{lenght}" >
 			<p>Client:</p>
-			<input type="text"  >
+			<input type="text"  th:field="*{us}" >
 			<p>Médecin:</p>
-			<input type="text"  >
+			<input type="text" th:field="*{work}" >
 			<p>Description:</p>
-			<input type="text"  >
+			<input type="text"  th:field="*{description}" >>
 			<br><br>
-			<input type="submit" value="Prendre un rendez-vous" />
+			<input type="submit" onclick="window.location.href = 'mypage';" value="Prendre un rendez-vous" />
 		</form>       
     </body>
 </html> 
