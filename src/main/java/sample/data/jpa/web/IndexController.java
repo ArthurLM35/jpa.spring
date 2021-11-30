@@ -75,7 +75,7 @@ public class IndexController {
 	public String saveRDV(Model model, @ModelAttribute("appoint") Appointment appoint) {
 		String date = appoint.getDate();
 							//Date date = appoint.getDate(); // VOIR SI CALENDRIER
-		int creneau= appoint.getCreneau();
+		String creneau= appoint.getCreneau();
 		
 		int length = appoint.getLenght();
 							//appoint.setLenght(30); // VOIR SI PAS 29 MIN POUR EVITER ERREUR/ 8 12 à 14 18

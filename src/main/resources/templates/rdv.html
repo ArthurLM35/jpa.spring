@@ -36,14 +36,19 @@
 
  	       <form action="#" th:action= "@{/prendreRdv}" th:object= "${appoint}" method="post"> 
 			<p>Date: </p>
-			<input type="text" th:field="*{date}" >
+			<input type="date" th:field="*{date}" >
 			<p>Creneau: </p>
-			<input type="text" th:field="*{creneau}" >
+			<input type="time" th:field="*{creneau}" >
 			<p>Temps:</p>
-			<input type="number" th:field="*{lenght}" >
-			
+			<input type="number" required value="15" min="15" max="60" step="15" th:field="*{lenght}" >			
 			<p>Description:</p>
-			<input type="text"  th:field="*{description}">
+			<input th:field="*{description}" list="description" id="ice-cream-choice" name="ice-cream-choice" />
+			<datalist id="description">
+   						<option value="Général">
+    					<option value="Vaccin">
+   						<option value="Radiographie">
+    					<option value="Autre">
+					</datalist>
 			<br><br>
 		 <input type="submit" onclick="window.location.href = 'mypage';" value="Prendre un rendez-vous" />
 		</form>  

@@ -1,5 +1,7 @@
 package sample.data.jpa.domain;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+//import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "Appointment")
@@ -20,7 +24,7 @@ public class Appointment {
 	private String date;
 	
 	
-	private int creneau;
+	private String creneau;
 	
 	
 	private int lenght;
@@ -65,11 +69,11 @@ public class Appointment {
 		this.date = date;
 	}
 	
-	public int getCreneau() {
+	public String getCreneau() {
 		return creneau;
 	}
 
-	public void setCreneau(int creneau) {
+	public void setCreneau(String creneau) {
 		this.creneau = creneau;
 	}
 	
