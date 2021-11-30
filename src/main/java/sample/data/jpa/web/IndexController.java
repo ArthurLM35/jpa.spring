@@ -37,8 +37,10 @@ public class IndexController {
 
 	private String welcomeMessage;
 	private String errorMessage;
+	private String informationMessage;
 
 	private long connectedUser;
+	private long appointmentWorker;
 
 	@GetMapping("/")
 	public String index() {
@@ -51,27 +53,43 @@ public class IndexController {
 	    List<Worker> workers = workerDao.findAll();
 	    model.addAttribute("workers", workers);
 		Appointment appoint = new Appointment();
-		model.addAttribute("appoint", appoint); 
+		model.addAttribute("appoint", appoint);
+		Worker idWorker = new Worker();
+		model.addAttribute("idWorker", idWorker);
+		
+		
 		return "rdv";
 	}
 
-	// VOIR LE SOUCIS RECUPéRATION D'UN STRING AU LIEU DU USER/WORKER
+	@PostMapping("/chooseWorker")
+	public String  saveWork(Model model, @ModelAttribute Worker idWorker) {
+		Long a  = idWorker.getId();
+		System.out.println("J'ai le " + a);
+		appointmentWorker = a;
+		model.addAttribute("informationMessage", " Médecin " + workerDao.getById(a).getName() + " sélectionné !");
+		return "redirect:rdv";
+	}
+
+	 //VOIR LE SOUCIS RECUPéRATION D'UN STRING AU LIEU DU USER/WORKER
 	@PostMapping("/prendreRdv")
 	public String saveRDV(Model model, @ModelAttribute("appoint") Appointment appoint) {
-		//String date = appoint.getDate();
+		String date = appoint.getDate();
 							//Date date = appoint.getDate(); // VOIR SI CALENDRIER
-		//int length = appoint.getLenght();
-							//appoint.setLenght(30); // VOIR SI PAS 29 MIN POUR EVITER ERREUR/ 8 12 à 14 18
-		User us = userDao.getById(connectedUser);
-		System.out.println(appoint.getWork().toString());
-		//Worker wrk = appoint.getWork();
-							//Worker wrk = appoint.getWork();
-		//String desc = appoint.getDescription();
+		int creneau= appoint.getCreneau();
 		
-		//if (userDao.findById(us.getId()) == null || workerDao.findById(wrk.getId())==null) {
-			//appointmentDao.save(appoint);
-			//return "redirect:mypage";
-			return "rdv";
+		int length = appoint.getLenght();
+							//appoint.setLenght(30); // VOIR SI PAS 29 MIN POUR EVITER ERREUR/ 8 12 à 14 18
+		appoint.setUs(userDao.getById(connectedUser));
+		appoint.setWork(workerDao.getById(appointmentWorker));
+		String desc = appoint.getDescription();
+		
+		//for(Appointment apt : appointmentDao.findAll()) { //VERIFIER ET HORAIRE
+			//if(apt.getDate()!= date && apt.getCreneau) // A améliorer avec +30 / genre 16/16H30 et 16H30/17
+			appointmentDao.save(appoint);
+		//appointmentWorker =0;
+			return "redirect:mypage";
+		//}
+			
 	}
 	
 	@GetMapping("/deco")
@@ -159,24 +177,7 @@ public class IndexController {
 		return "redirect:mypage";
 	}
 
-//	@GetMapping("/mypage")
-//	public String acc(Model model) {
-//		model.addAttribute("users", userDao.findAll());
-//		return "mypage";
-//	}
 
-//	@RequestMapping("/get-by-user")
-//	@ResponseBody
-//	public String aptByUser(long id) {
-//		try {
-//			// User us = userDao
-//			Appointment appointment = appointmentDao.findById(id).get();
-//			appointmentDao.delete(appointment);
-//		} catch (Exception ex) {
-//			return "Error deleting the appointment:" + ex.toString();
-//		}
-//		return "Appointment " + id + " succesfully deleted!";
-//	}
 
 	@GetMapping("/mypage")
 	public String acc(Model model) {
@@ -184,7 +185,7 @@ public class IndexController {
 		model.addAttribute("welcomeMessage", "Bienvenue " + userDao.getById(connectedUser).getName());
 		List<Appointment> appaintmentDao = new ArrayList<>();
 		for (Appointment d : appointmentDao.findAll()) {
-
+			System.out.println(connectedUser);
 			if (d.getUs().getId() == connectedUser || d.getWork().getId() == connectedUser) {
 				appaintmentDao.add(d);
 			}

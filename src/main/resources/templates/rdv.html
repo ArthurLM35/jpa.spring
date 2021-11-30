@@ -30,30 +30,41 @@
 <!-- LENGHT VALEUR PRéDéFINI 30/60 OPTIONNEL -->
 
 <!-- DESCRIPTION MENU DEROULANT AVEC CAS AUTRE OPTIONNEL -->
-	<form action="#" th:action= "@{/prendreRdv}" th:object= "${appoint}" method="post"> 
+	<form action="#" th:action= "@{/chooseWorker}" th:object= "${idWorker}" method="post"> 
 	
 	  <div class="form-group">
      <label class="col-md-3 control-label">Sélectionnez un médecin</label>
          <div class="col-md-5">
-             <select th:field="*{work}" >
+             <select  th:field="*{id}" >
                  <option th:each="worker : ${workers}"
-                                 th:value="${worker}"                    
-                                 th:text="${worker}"/>
-                                  <!-- th:text="${worker.name}+' : '+${worker.job}" --> 
+                                 th:value="${worker.id}"                    
+                                 th:text="${worker.name}+' : '+${worker.job}"/>
              </select>
         </div>
    </div>
-		<!-- 	<p>Date: </p>
-			
+   		<br>
+   		
+   	 	<div th:if="${informationMessage}" th:utext="${informationMessage}"
+         style="color:red;font-style:italic;">
+         </div>
+    
+          <br>
+  <input type="submit" onclick="window.location.href = 'rdv';" value="Valider le médecin" />
+</form>  
+
+ 	       <form action="#" th:action= "@{/prendreRdv}" th:object= "${appoint}" method="post"> 
+			<p>Date: </p>
 			<input type="text" th:field="*{date}" >
+			<p>Creneau: </p>
+			<input type="text" th:field="*{creneau}" >
 			<p>Temps:</p>
 			<input type="number" th:field="*{lenght}" >
 			
 			<p>Description:</p>
-			<input type="text"  th:field="*{description}" > -->
+			<input type="text"  th:field="*{description}">
 			<br><br>
-			<input type="submit" onclick="window.location.href = 'mypage';" value="Prendre un rendez-vous" />
-		</form>       
+		 <input type="submit" onclick="window.location.href = 'mypage';" value="Prendre un rendez-vous" />
+		</form>  
     </body>
 </html> 
 

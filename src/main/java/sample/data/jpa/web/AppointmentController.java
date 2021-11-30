@@ -38,9 +38,9 @@ public class AppointmentController {
   /**
    * GET /delete  --> Delete the appointment having the passed id.
    */
-  @RequestMapping("/delete")
+  @RequestMapping("/delete/{id}")
   @ResponseBody
-  public String delete(long id) {
+  public String delete(@PathVariable long id) {
     try {
       Appointment appointment = appointmentDao.findById(id).get();
       appointmentDao.delete(appointment);
@@ -48,7 +48,7 @@ public class AppointmentController {
     catch (Exception ex) {
       return "Error deleting the appointment:" + ex.toString();
     }
-    return "redirect:myhome";
+    return "Appointment succesfully deleted !";
   }
   
   @RequestMapping("/get-by-user")
