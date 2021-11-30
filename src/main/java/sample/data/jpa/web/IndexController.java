@@ -50,7 +50,12 @@ public class IndexController {
 	@GetMapping("/rdv")
 	public String rdv(Model model) {
 		//model.addAttribute("user", userDao.getById(connectedUser).getName()); ça marche
-	    List<Worker> workers = workerDao.findAll();
+	    List<Worker> workers = new ArrayList<>();
+		for(Worker work : workerDao.findAll()) {
+			if(work.getId() != connectedUser) {
+				workers.add(work);
+			}
+		}
 	    model.addAttribute("workers", workers);
 		Appointment appoint = new Appointment();
 		model.addAttribute("appoint", appoint);
