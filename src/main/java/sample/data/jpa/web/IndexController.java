@@ -49,21 +49,26 @@ public class IndexController {
 
 	@GetMapping("/rdv")
 	public String rdv(Model model) {
-		//model.addAttribute("user", userDao.getById(connectedUser).getName()); ça marche
-	    List<Worker> workers = new ArrayList<>();
-		for(Worker work : workerDao.findAll()) {
-			if(work.getId() != connectedUser) {
-				workers.add(work);
+		if(connectedUser != 0) {
+			System.out.println("efezfzfzf");
+		    List<Worker> workers = new ArrayList<>();
+			for(Worker work : workerDao.findAll()) {
+				if(work.getId() != connectedUser) {
+					workers.add(work);
+				}
 			}
+		    model.addAttribute("workers", workers);
+			Appointment appoint = new Appointment();
+			model.addAttribute("appoint", appoint);
+			Worker idWorker = new Worker();
+			model.addAttribute("idWorker", idWorker);		
+			return "rdv";
 		}
-	    model.addAttribute("workers", workers);
-		Appointment appoint = new Appointment();
-		model.addAttribute("appoint", appoint);
-		Worker idWorker = new Worker();
-		model.addAttribute("idWorker", idWorker);
+		else {
+			System.out.println("151156165561561");
+			return "redirect:/";
+		}
 		
-		
-		return "rdv";
 	}
 
 	@PostMapping("/chooseWorker")
@@ -79,26 +84,63 @@ public class IndexController {
 	@PostMapping("/prendreRdv")
 	public String saveRDV(Model model, @ModelAttribute("appoint") Appointment appoint) {
 		String date = appoint.getDate();
-							//Date date = appoint.getDate(); // VOIR SI CALENDRIER
-		String creneau= appoint.getCreneau();
-		
-		int length = appoint.getLenght();
-							//appoint.setLenght(30); // VOIR SI PAS 29 MIN POUR EVITER ERREUR/ 8 12 à 14 18
-		appoint.setUs(userDao.getById(connectedUser));
-		appoint.setWork(workerDao.getById(appointmentWorker));
-		String desc = appoint.getDescription();
-		
-		//for(Appointment apt : appointmentDao.findAll()) { //VERIFIER ET HORAIRE
+		String creneau= creneauHeure(appoint.getCreneau());
+		boolean present = false;
+		for(Appointment app : appointmentDao.findAll()) {
+			if(app.getDate().equals(date) && app.getCreneau().equals(creneau)) {
+				present = true;
+			}
+		}	
+		if(present) {
+			return "redirect:rdv";
+		}
+		else {		
+			appoint.setUs(userDao.getById(connectedUser));
+			appoint.setWork(workerDao.getById(appointmentWorker));		
+			//for(Appointment apt : appointmentDao.findAll()) { //VERIFIER ET HORAIRE
 			//if(apt.getDate()!= date && apt.getCreneau) // A améliorer avec +30 / genre 16/16H30 et 16H30/17
+			appoint.setCreneau(creneauHeure(appoint.getCreneau()));
 			appointmentDao.save(appoint);
-		//appointmentWorker =0;
+			//appointmentWorker =0;
 			return "redirect:mypage";
-		//}
-			
+			//}
+		}			
+	}
+	
+	public int heureCreneau(String h) {
+		String heures = h.substring(0, 2);
+		return Integer.parseInt(heures);
+	}
+	
+	public int minuteCreneau(String h) {
+		String minutes = h.substring(3, 5);
+		return Integer.parseInt(minutes);
+	}
+	public String creneauHeure(String h) {
+		int heur = heureCreneau(h);
+		int minut = minuteCreneau(h);
+		if(0 <= minut && minut < 15) {
+			minut=0;
+		}
+		else if(15 <= minut && minut < 45) {
+			minut=30;
+		}
+		else {
+			minut=0;
+			heur++;
+		}
+		if(minut == 0) {
+			return heur +":"+ minut+"0";
+		}
+		else {
+			return heur +":"+ minut;
+		}
+		
 	}
 	
 	@GetMapping("/deco")
 	public String deco() {
+		connectedUser = 0;
 		return "page1.html";
 	}
 
