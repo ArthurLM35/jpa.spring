@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<html>
     <head>
         <meta charset="utf-8" />
         <title>Titre</title>
@@ -11,19 +10,21 @@
 
     	<form action="#" th:action= "@{/inscription}" th:object= "${worker}" method="post"> 
 			<p>Adresse mail: </p>
-			<input type="text" th:field="*{email}" >
-			<p>Adresse mail: </p>
-			<input type="text" th:field="*{name}" >
+			<input type="text" th:value="${worker.email}" th:field="*{email}" >
+			<p>Prénom et Nom: </p>
+			<input type="text" th:value="${worker.name}" th:field="*{name}" >
 			<p>Mot de passe:</p>
-			<input type="text"  th:field="*{password}" >
+			<input type="text" th:value="${worker.password}" th:field="*{password}" >
 			<p>Travail:</p>
-			<input type="text" th:field="*{job}"  >					
+			<input type="text" th:value="${worker.job}" th:field = "*{job}">
 			<br><br>
 			<input type="submit" value="S'inscrire" />
 		</form>       
 		<br><br>
+		
 		<div th:if="${errorMessage}" th:utext="${errorMessage}"
          style="color:red;font-style:italic;">
          </div>
+         
     </body>
 </html> 

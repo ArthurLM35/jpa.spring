@@ -8,27 +8,9 @@
     <body>
     	<h1>Veuillez remplir les informations suivantes pour prendre un rendez-vous:</h1> 
 		
-<!-- AFFICHER LE USER  -->		
-	<!-- 	<p>Client:</p>
-		<input th:text="${user}">  ça marche --> 
-<!-- SELECTION WORKER PAR LISTE DEROULANTE -->		
-
-<!--   <div class="form-group">
-     <label class="col-md-3 control-label">Sélectionnez un médecin</label>
-         <div class="col-md-5">
-             <select th:field="*{work}" >
-                 <option th:each="worker : ${workers}"
-                                 th:value="${worker}"
-                                 th:text="${worker.name}+' : '+${worker.job}" />
-             </select>
-        </div>
-   </div> -->
- 
 <!--  DATE SELECTION ADEQUATE OPTIONNEL -->
 <!-- <input id="date" type="date" value="2017-06-01"> -->
-
 <!-- LENGHT VALEUR PRéDéFINI 30/60 OPTIONNEL -->
-
 <!-- DESCRIPTION MENU DEROULANT AVEC CAS AUTRE OPTIONNEL -->
 	<form action="#" th:action= "@{/chooseWorker}" th:object= "${idWorker}" method="post"> 
 	

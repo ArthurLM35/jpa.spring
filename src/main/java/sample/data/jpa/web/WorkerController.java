@@ -37,9 +37,9 @@ public class WorkerController {
   /**
    * GET /delete  --> Delete the worker having the passed id.
    */
-  @RequestMapping("/delete")
+  @RequestMapping("/delete/{id}")
   @ResponseBody
-  public String delete(long id) {
+  public String delete(@PathVariable long id) {
     try {
       Worker worker = workerDao.findById(id).get();
       workerDao.delete(worker);

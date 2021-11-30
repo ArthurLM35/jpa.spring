@@ -1,5 +1,6 @@
 package sample.data.jpa.domain;
 
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -9,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "Worker")
 public class Worker extends User{
 
-
+	
 	@NotNull
 	private String job;
   
@@ -26,7 +27,7 @@ public class Worker extends User{
 		return job;
 	}
 
-	public void setName(String job) {
+	public void setJob(String job) {
 		this.job = job;
 	}
 }

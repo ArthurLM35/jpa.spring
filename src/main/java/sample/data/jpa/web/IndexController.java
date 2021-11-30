@@ -98,7 +98,7 @@ public class IndexController {
 	}
 
 	@GetMapping("/inscription2")
-	public String insc(Model model) {
+	public String inscU(Model model) {
 		User user = new User();
 		model.addAttribute("user", user);
 		return "inscription2.html";
@@ -117,7 +117,7 @@ public class IndexController {
 	}
 
 	@GetMapping("/inscription")
-	public String inscP(Model model) {
+	public String inscW (Model model) {
 		Worker worker = new Worker();
 		model.addAttribute("worker", worker);
 		return "inscription.html";
@@ -126,6 +126,10 @@ public class IndexController {
 	@PostMapping("/inscription")
 	public String saveWorker(Model model, @ModelAttribute("worker") Worker worker) {
 		String mail = worker.getEmail();
+		System.out.println("MAIL :" + mail);
+		System.out.println("NAME :" +worker.getName());
+		System.out.println("PSW :" +worker.getPassword());
+		System.out.println("JOB :" + worker.getJob());
 		if (workerDao.findByEmail(mail) == null) {
 			workerDao.save(worker);
 			return "redirect:connection";
