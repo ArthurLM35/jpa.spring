@@ -26,9 +26,9 @@
    </div>
    		<br>
    		
-   	 	<div th:if="${informationMessage}" th:utext="${informationMessage}"
+   	 	<h3 th:if="${informationMessage}" th:utext="${informationMessage}"
          style="color:red;font-style:italic;">
-         </div>
+         </h3>
     
           <br>
   <input type="submit" onclick="window.location.href = 'rdv';" value="Valider le médecin" />
@@ -47,6 +47,7 @@
    						<option value="Général">
     					<option value="Vaccin">
    						<option value="Radiographie">
+   						<option value="Prise de Sang">
     					<option value="Autre">
 					</datalist>
 			<br><br>
