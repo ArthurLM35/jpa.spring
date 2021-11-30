@@ -37,7 +37,7 @@
  	       <form action="#" th:action= "@{/prendreRdv}" th:object= "${appoint}" method="post"> 
 			<p>Date: </p>
 			<input type="date" th:field="*{date}" >
-			<p>Creneau: </p>
+			<p>Créneau: </p>
 			<input type="time" th:field="*{creneau}" >
 			<p>Temps:</p>
 			<input type="number" required value="15" min="15" max="60" step="15" th:field="*{lenght}" >			
