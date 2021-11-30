@@ -49,21 +49,26 @@ public class IndexController {
 
 	@GetMapping("/rdv")
 	public String rdv(Model model) {
-		//model.addAttribute("user", userDao.getById(connectedUser).getName()); ça marche
-	    List<Worker> workers = new ArrayList<>();
-		for(Worker work : workerDao.findAll()) {
-			if(work.getId() != connectedUser) {
-				workers.add(work);
+		if(connectedUser != 0) {
+			System.out.println("efezfzfzf");
+		    List<Worker> workers = new ArrayList<>();
+			for(Worker work : workerDao.findAll()) {
+				if(work.getId() != connectedUser) {
+					workers.add(work);
+				}
 			}
+		    model.addAttribute("workers", workers);
+			Appointment appoint = new Appointment();
+			model.addAttribute("appoint", appoint);
+			Worker idWorker = new Worker();
+			model.addAttribute("idWorker", idWorker);		
+			return "rdv";
 		}
-	    model.addAttribute("workers", workers);
-		Appointment appoint = new Appointment();
-		model.addAttribute("appoint", appoint);
-		Worker idWorker = new Worker();
-		model.addAttribute("idWorker", idWorker);
+		else {
+			System.out.println("151156165561561");
+			return "redirect:/";
+		}
 		
-		
-		return "rdv";
 	}
 
 	@PostMapping("/chooseWorker")
@@ -135,6 +140,7 @@ public class IndexController {
 	
 	@GetMapping("/deco")
 	public String deco() {
+		connectedUser = 0;
 		return "page1.html";
 	}
 
