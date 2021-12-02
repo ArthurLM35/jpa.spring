@@ -20,7 +20,7 @@ Arthur Lalande-Marchand
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nous avons décider d'avoir trois entités pour représenter cette action. Notre première entité, User, représente la création d'un utilisateur. Elle possède plusieurs atributs: l'attribut id, clef primaire de notre entité, l'attribut name, l'attribut mail puis l'attribut mdp. La deuxième entité nommée Worker. Elle hérite de la classe User. Elle permet de différencier si un utilisateur est un client ou un professionnel. Pour cela, elle possède un attribut job qui fait réference à son travail. Notre dernière entité correspond à un rendez-vous. Elle s'apelle Appointment. Grâce à ses 5 attributs: l'attribut id, clef primaire de notre classe, l'attribut date, l'attibut lenght, l'attribut us qui correponds à un User (notre client), l'attribut work qui corresponds à un Worker (notre professionnel) puis un attribut description. 
 
-## Le but, les technologies et le lancement
+## Le controller
 
 
 
