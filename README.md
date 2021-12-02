@@ -16,12 +16,13 @@ Arthur Lalande-Marchand
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pour la réalisation de notre TP, nous avons utilisé le framework Sprint Boot. Pour stocker nos informations, nous avons utilisé la base de données HSQLDB. Pour finir, il fallait avoir la possibilité de créer un front pour produire une vue Web. Le template Thymeleaf a été utilisé.
 
 
-## Nos classes
+## Le domain
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nous avons décider d'avoir trois entités pour représenter cette action. Notre première entité, User, représente la création d'un utilisateur. Elle possède plusieurs atributs: l'attribut id, clef primaire de notre entité, l'attribut name, l'attribut mail puis l'attribut mdp. La deuxième entité nommée Worker. Elle hérite de la classe User. Elle permet de différencier si un utilisateur est un client ou un professionnel. Pour cela, elle possède un attribut job qui fait réference à son travail. Notre dernière entité correspond à un rendez-vous. Elle s'apelle Appointment. Grâce à ses 5 attributs: l'attribut id, clef primaire de notre classe, l'attribut date, l'attibut lenght, l'attribut us qui correponds à un User (notre client), l'attribut work qui corresponds à un Worker (notre professionnel) puis un attribut description. 
 
 ## Le controller
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pour chacune des classes du domaine, nous avons du faire le repository/DAO correspondant ainsi que les controllers se basant sur ces repository. Ces méthodes permettent d'utiliser les DAO afin de faire des appels sur les éléments contenus dans la base de données. Quant à lui, l'index controller à été fait pour permettre le bon fonctionnement du front. Celui ci fait appelle à tous les DAO pour afin de regrouper toute les fonctionnalités de l'application. La mise en place du front nous à permis de nous rendre compte de toutes les méthodes qu'ils nous manquait.
 
 
 ## Fonctionnement du front
